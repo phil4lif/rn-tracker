@@ -1,40 +1,21 @@
-import React, { useState, useContext } from 'react';
-import { View, StyleSheet, } from 'react-native';
-import { Text, Input, Button } from 'react-native-elements'
-import Spacer from './components/Spacer';
+import React, { useContext } from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-elements'
+import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
-
+import AuthForm from '../components/AuthForm'
 const SignupScreen = ({ navigation }) => {
     const { state, signup } = useContext(AuthContext);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
 
     return (
         <View style={styles.containerStyle}>
-            <Spacer />
-            <Text h3 >Sign Up for Tracker</Text>
-            <Spacer />
-            <Input
-                label="Email"
-                autoCapitalize="none"
-                autoCorrect={false}
-                value={email}
-                onChangeText={setEmail} />
-            <Spacer />
-            <Input
-                secureTextEntry
-                label="Password"
-                autoCapitalize="none"
-                autoCorrect={false}
-                value={password}
-                onChangeText={setPassword} />
-            {state.errorMessage ? <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
-            <Spacer>
-                <Button 
-                onPress={() => signup({ email, password})}
-                title="Sign Up" />
-            </Spacer>
+            <AuthForm
+            headerText="Sign Up for Tracker"
+            errorMessage={state.errorMessage}
+            submitButtonText="Sign Up"
+            onSubmit={signup}
+            />
+
         </View>
     )
 };
@@ -51,12 +32,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 200
     },
-    errorMessage: {
-        fontSize: 16,
-        color: 'red',
-        marginLeft: 15,
-        marginTop: 15
-    }
+
+
 });
 
 export default SignupScreen;
