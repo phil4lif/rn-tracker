@@ -1,2 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native'
+import { Input, Button } from 'react-native-elements';
+import Spacer from './Spacer';
+const TrackForm = () => {
+    return <>
+        <Spacer>
+            <Input />
+        </Spacer>
+        <Spacer>
+            <Button title="start recording" />
+        </Spacer>
+    </>
+}
+
+export default TrackForm;
