@@ -2,6 +2,7 @@ import createDataContext from './createDataContext';
 import trackerApi from '../api/tracker';
 import { AsyncStorage } from 'react-native';
 import { navigate } from '../navigationRef';
+
 const authReducer = (state, action) => {
     switch (action.type) {
         case 'add_error':
@@ -14,6 +15,17 @@ const authReducer = (state, action) => {
             return state;
     }
 };
+
+const tryLocalSignin = dispatch => async () => {
+    const token = await AsyncStorage.getItem('token');
+    if (token) {
+        dispatch({ type: 'signin', payload: token });
+        navigate('TrackList');
+    }
+    else {
+        navigate('Signup')
+    }
+}
 
 const clearErrorMessage = dispatch => () => {
     dispatch({ type: 'clear_error_message' });
@@ -51,6 +63,6 @@ const signout = (dispatch) => {
 }
 export const { Provider, Context } = createDataContext(
     authReducer,
-    { signin, signout, signup, clearErrorMessage },
+    { signin, signout, signup, clearErrorMessage, tryLocalSignin },
     { token: null, errorMessage: '' }
 );
