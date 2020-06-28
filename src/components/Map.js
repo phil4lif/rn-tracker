@@ -6,8 +6,8 @@ const Map = () => {
     let points = [];
     for (let i = 0; i < 10; i++){
         points.push({
-            latitude: 37.33233 + i * 0.001,
-            longitude: -122.03121 + i * 0.001,
+            latitude: 33.504021 + i * 0.001,
+            longitude: -112.095422 + i * 0.001,
 
         });
     }
@@ -15,12 +15,12 @@ const Map = () => {
         <MapView 
         style={styles.map}
         initialRegion={{
-            latitude: 37.33233,
-            longitude: -122.03121,
+            latitude: 33.504021,
+            longitude: -112.095422,
             latitudeDelta: 0.01,
             longitudeDelta: 0.01
         }}>
-            <Polyline coordinates={points} />
+            {/* <Polyline coordinates={points} /> */}
         </MapView>
     )
 }
